@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { Store } from '@ngrx/store';
 
@@ -17,7 +18,7 @@ export class WelcomeComponent implements OnInit, OnDestroy {
   storeSub: any;
   game: any;
 
-  constructor(private store: Store<State>, private gameService: GameService) { }
+  constructor(private store: Store<State>, private router: Router, private gameService: GameService) { }
 
   ngOnInit() {
     this.storeSub = this.store.select('game').subscribe(game => {
@@ -33,8 +34,8 @@ export class WelcomeComponent implements OnInit, OnDestroy {
     this.gameService.getNewGame(difficulty).then((r: any) => {
         console.log('game =', r);
         this.store.dispatch(new GameActions.UpdateGame(r));
-      }
-    );
+        this.router.navigateByUrl('/play');
+      });
   }
 
 }
