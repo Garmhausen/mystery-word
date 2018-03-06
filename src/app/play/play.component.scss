@@ -1,0 +1,58 @@
+.play-comp {
+  display: grid;
+  grid-template-columns: 20vw 60vw 20vw;
+  grid-template-rows: 40vh 1fr;
+
+  div {
+    width: 100%;
+  }
+
+  .difficulty, .remaining-num {
+    font-size: 3rem;
+    padding: 30px;
+    line-height: 150%;
+  }
+
+  .remaining-guesses {
+    grid-column: 3;
+    text-align: right;
+
+    .remaining-num {
+      font-size: 4rem;
+      margin-right: 30px;
+    }
+  }
+
+  .word {
+    // letter-spacing: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    font-size: 6rem;
+  }
+
+  .word-letter {
+    margin: 10px;
+  }
+
+  .bad-and-current {
+    grid-column: 2;
+    justify-content: center;
+    padding-top: 60px;
+    font-size: 2rem;
+  }
+
+  .guess-title, .all-guess-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    .all-guess-letter, .current-guess {
+      font-size: 6rem;
+    }
+
+    .current-guess {
+      color: red;
+    }
+  }
+}

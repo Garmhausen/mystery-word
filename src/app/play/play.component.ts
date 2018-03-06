@@ -1,15 +1,84 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
+import { FormGroup, FormControl } from '@angular/forms';
+
+import { Store } from '@ngrx/store';
+
+import { GameService } from '../game.service';
+
+import { State } from '../shared/reducers';
+import * as GameActions from '../shared/actions/game';
 
 @Component({
   selector: 'app-play',
   templateUrl: './play.component.html',
   styleUrls: ['./play.component.scss']
 })
-export class PlayComponent implements OnInit {
+export class PlayComponent implements OnInit, OnDestroy {
 
-  constructor() { }
+  storeSub: any;
+  game:     any;
+
+  public guessForm:  FormGroup;
+  public guessInput: FormControl;
+  public events:     any[] = [];
+
+  constructor(private store: Store<State>, private gameService: GameService, private router: Router) {
+    this.guessForm = new FormGroup({
+      guessInput: new FormControl('default')
+    });
+    this.subscribeToGuessFormChanges();
+  }
 
   ngOnInit() {
+    this.storeSub = this.store.select('game').subscribe(game => {
+      this.game = game;
+      if (!this.game.active) {
+        // game is over. (or possibly hasn't begun)
+        this.determineOutcome();
+      }
+    });
+  }
+
+  ngOnDestroy() {
+    this.storeSub.unsubscribe();
+  }
+
+  subscribeToGuessFormChanges() {
+    const guessStatusChanges$ = this.guessForm.statusChanges;
+    const guessValueChanges$  = this.guessForm.valueChanges;
+
+    guessStatusChanges$.subscribe(x => {
+      this.events.push({ event: 'STATUS_CHANGED', object: x }); // for future validation.
+    });
+
+    guessValueChanges$.subscribe(x => {
+      this.events.push({ event: 'VALUE_CHANGED', object: x }); // for debugging
+    });
+
+    // TODO: listen for submition here and process guess using the function below.
+  }
+
+  submitGuess(guess) {
+    this.gameService.makeGuess(this.game, guess).then(   (r: any) => {
+        this.store.dispatch(new GameActions.UpdateGame(r));
+      });
+  }
+
+  determineOutcome() {
+    if (this.game.win) {
+      console.log('user has won!');
+      // redirect to /win
+      this.router.navigateByUrl('/win');
+    } else if (this.game.lose) {
+      console.log('user has lost!');
+      // redirect to /lose
+      this.router.navigateByUrl('/lose');
+    } else {
+      console.log('new game, difficulty has not been selected.  redirecting to /');
+      // redirect to /
+      this.router.navigateByUrl('/');
+    }
   }
 
 }

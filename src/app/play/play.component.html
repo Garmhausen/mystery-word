@@ -1,3 +1,29 @@
-<p>
-  play works!
-</p>
+<section class="play-comp">
+  <div class="diff">
+    <span>Difficulty</span><br />
+    <span class="difficulty">{{game.difficulty}}</span>
+  </div>
+  <div class="word">
+    <div *ngFor="let item of game.wordArray">
+      <span *ngIf="item.revealed" class="letter">{{item.letter}}</span>
+      <span *ngIf="!item.revealed"  class="letter">_</span>
+    </div>
+  </div>
+  <div class="remaining-guesses">
+    <span>Remaining Guesses</span><br />
+    <span class="remaining-num">
+      {{game.remainingGuesses}}
+    </span>
+  </div>
+  <div class="bad-and-current">
+    <div class="guess-title">
+      Type a guess:
+    </div>
+    <div *ngFor="let letter of game.badGuessArray" class="all-guess-wrapper">
+      <span class="all-guess-letter">{{letter}}</span>
+    </div>
+    <div class="current-guess">
+      <span>???</span>
+    </div>
+  </div>
+</section>
