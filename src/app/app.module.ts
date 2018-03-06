@@ -17,6 +17,7 @@ import { reducers, metaReducers } from './shared/reducers';
 import { CustomRouterStateSerializer } from './shared/utils';
 
 // services
+import { GameService } from './game.service';
 import { Utils } from './shared/utils';
 
 // components
@@ -48,6 +49,7 @@ import { LoseComponent } from './lose/lose.component';
     !environment.production ? StoreDevtoolsModule.instrument() : []
   ],
   providers: [
+    GameService,
     Utils,
     {
       provide: RouterStateSerializer,
