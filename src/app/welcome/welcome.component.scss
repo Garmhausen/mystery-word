@@ -1,0 +1,71 @@
+.welcome-comp {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20vh;
+
+  h1 {
+    font-size: 4rem;
+  }
+
+  a {
+    font-size: 2rem;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+  
+  .button-wrapper {
+    display: flex;
+
+    .button {
+      cursor: pointer;
+      width: 170px;
+      height: 70px;
+      font-size: 2.5rem;
+      border: 3px solid black;
+      margin: 5px;
+      background: white;
+      outline: none;
+      text-align: center;
+    }
+
+    .easy {
+      color: green;
+    }
+
+    .easy:hover {
+      color: white;
+      background: green;
+      border-color: green;
+    }
+
+    .normal {
+      color: blue;
+    }
+
+    .normal:hover {
+      color: white;
+      background: blue;
+      border-color: blue;
+    }
+
+    .hard {
+      color: red;
+    }
+
+    .hard:hover {
+      color: white;
+      background: red;
+      border-color: red;
+    }
+  }
+
+  .bottom-menu {
+    margin-top: 70px;
+  }
+
+}
