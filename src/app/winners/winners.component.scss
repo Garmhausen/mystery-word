@@ -1,0 +1,25 @@
+.winners-comp {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 200%;
+  
+  h1, a {
+    margin: 40px 0;
+  }
+
+  .winner-table {
+    background: lightgray;
+
+    thead {
+      font-size: 1.4rem;
+      font-weight: 800;
+    }
+    
+    td {
+      border: 1px solid lightgray;
+      background: white;
+      padding: 10px 10px 5px;
+    }
+  }
+}

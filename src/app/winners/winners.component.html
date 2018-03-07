@@ -1,3 +1,25 @@
-<p>
-  winners works!
-</p>
+<section class="winners-comp">
+  <h1>Winners</h1>
+  <table class="winner-table">
+    <thead>
+      <tr>
+        <td>Name</td>
+        <td>Word</td>
+        <td>Guesses</td>
+        <td>Difficulty</td>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let win of winners">
+        <td>{{win.name}}</td>
+        <td>{{win.word}}</td>
+        <td>{{win.guesses}}</td>
+        <td>{{win.difficulty}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <br />
+  <a href="/">Back</a>
+</section>
