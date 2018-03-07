@@ -45,7 +45,7 @@ export class WinComponent implements OnInit, OnDestroy {
       } else if (this.game.lose) {
         this.router.navigateByUrl('/lose');
       } else if (!this.game.win) {
-        this.startClean();
+        this.router.navigateByUrl('/');
       }
     });
   }
