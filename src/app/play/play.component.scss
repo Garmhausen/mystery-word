@@ -35,6 +35,11 @@
       font-size: 3rem;
     }
 
+    @media screen and (min-width: 1024px) {
+      font-size: 4rem;
+    }
+
+
     .letter-wrapper {
       display: flex;
       justify-content: center;

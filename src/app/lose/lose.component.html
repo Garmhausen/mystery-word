@@ -4,7 +4,7 @@
     <span class="difficulty">{{game.difficulty}}</span>
   </div>
   <div class="word">
-    <div *ngFor="let item of game.wordArray">
+    <div *ngFor="let item of game.wordArray" class="letter-wrapper">
       <span class="letter" [ngClass]="!item.revealed ? 'lose' : ''">{{item.letter}}</span>
     </div>
   </div>
@@ -19,13 +19,15 @@
       You lose.
     </div>
     <div class="winner-wrapper">
-      <div *ngFor="let letter of game.badGuessArray" class="all-guess-wrapper">
-        <span class="all-guess-letter">{{letter}}</span>
+      <div class="all-guess-wrapper">
+        <div *ngFor="let letter of game.badGuessArray" class="all-guess">
+          <span class="all-guess-letter">{{letter}}</span>
+        </div>
       </div>
       <br />
       <span><a href="{{game.dictionary}}" target="_blank">Define: {{game.word}}</a></span>
       <br />
-      <span><a (click)="utils.startClean()">Return</a></span>
+      <span><a class="return" (click)="utils.startClean()">Return</a></span>
     </div>
   </div>
 </section>
