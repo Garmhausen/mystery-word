@@ -5,6 +5,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 
 import { GameService } from '../game.service';
+import { Utils } from '../shared/utils';
 
 import { State } from '../shared/reducers';
 import * as GameActions from '../shared/actions/game';
@@ -25,7 +26,12 @@ export class WinComponent implements OnInit, OnDestroy {
   name = '';
   nameIsValid = false;
 
-  constructor(private store: Store<State>, private gameService: GameService, private router: Router) {
+  constructor(
+    private store: Store<State>,
+    private gameService: GameService,
+    private router: Router,
+    public utils: Utils
+  ) {
     this.nameForm = new FormGroup({
       nameInput: new FormControl(this.name, [
         Validators.required,
@@ -83,10 +89,5 @@ export class WinComponent implements OnInit, OnDestroy {
         this.router.navigateByUrl('/winners');
       });
     }
-  }
-
-  startClean(): void {
-    this.store.dispatch(new GameActions.RemoveGame());
-    this.router.navigateByUrl('/');
   }
 }

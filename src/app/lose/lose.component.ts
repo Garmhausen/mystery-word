@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 
 import { Store } from '@ngrx/store';
 
+import { Utils } from '../shared/utils';
+
 import { State } from '../shared/reducers';
 import * as GameActions from '../shared/actions/game';
 
@@ -16,7 +18,11 @@ export class LoseComponent implements OnInit, OnDestroy {
   storeSub: any;
   game: any;
 
-  constructor(private store: Store<State>, private router: Router) { }
+  constructor(
+    private store: Store<State>,
+    private router: Router,
+    public utils: Utils
+  ) { }
 
   ngOnInit() {
     this.storeSub = this.store.select('game').subscribe(game => {
@@ -33,10 +39,5 @@ export class LoseComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.storeSub.unsubscribe();
-  }
-
-  startClean(): void {
-    this.store.dispatch(new GameActions.RemoveGame());
-    this.router.navigateByUrl('/');
   }
 }
