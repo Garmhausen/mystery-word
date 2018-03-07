@@ -19,15 +19,23 @@ export class PlayComponent implements OnInit, OnDestroy {
   storeSub: any;
   game:     any;
 
+  // choosing not to use regex for the benefit of this example.
+  alphabet = [
+    'a', 'b', 'c', 'd',
+    'e', 'f', 'g', 'h',
+    'i', 'j', 'k', 'l',
+    'm', 'n', 'o', 'p',
+    'q', 'r', 's', 't',
+    'u', 'v', 'w', 'x',
+    'y', 'z'];
+
   public guessForm:   FormGroup;
   public guessInput:  FormControl;
-  // public guessSubmit: FormControl;
-  public events:      any[] = [];
+  // public events:      any[] = [];
 
   constructor(private store: Store<State>, private gameService: GameService, private router: Router) {
     this.guessForm = new FormGroup({
       guessInput: new FormControl(),
-      // guessSubmit: new FormControl()
     });
     this.subscribeToGuessFormChanges();
   }
@@ -36,7 +44,6 @@ export class PlayComponent implements OnInit, OnDestroy {
     this.storeSub = this.store.select('game').subscribe(game => {
       this.game = game;
       if (!this.game.active) {
-        // game is over. (or possibly hasn't begun)
         this.determineOutcome();
       }
     });
@@ -47,23 +54,23 @@ export class PlayComponent implements OnInit, OnDestroy {
   }
 
   subscribeToGuessFormChanges() {
-    const guessStatusChanges$ = this.guessForm.statusChanges;
+    // const guessStatusChanges$ = this.guessForm.statusChanges;
     const guessValueChanges$  = this.guessForm.valueChanges;
 
-    guessStatusChanges$.subscribe(x => {
-      this.events.push({ event: 'STATUS_CHANGED', object: x }); // for future validation.
-    });
+    // guessStatusChanges$.subscribe(x => {
+    //   this.events.push({ event: 'STATUS_CHANGED', object: x }); // for future validation.
+    // });
 
     guessValueChanges$.subscribe(x => {
-      this.events.push({ event: 'VALUE_CHANGED', object: x }); // for debugging
-      console.log('x =', x);
-      if (x.guessInput && x.guessInput.length > 1) {
-        this.guessForm.reset({ guessInput: x.guessInput.slice(x.guessInput.length - 1) });
+      // this.events.push({ event: 'VALUE_CHANGED', object: x }); // for debugging
+      if (x.guessInput.length > 0 && !this.isClean(x.guessInput)) {
+        const str = this.cleanInput(x.guessInput);
+        this.guessForm.reset({ guessInput: str });
       }
     });
   }
 
-  submitGuess(guess) {
+  submitGuess(guess): void {
     console.log('make guess for', guess);
     this.guessForm.reset();
     this.gameService.makeGuess(this.game, guess).then(   (r: any) => {
@@ -71,20 +78,29 @@ export class PlayComponent implements OnInit, OnDestroy {
       });
   }
 
-  determineOutcome() {
+  determineOutcome(): void {
     if (this.game.win) {
-      console.log('user has won!');
-      // redirect to /win
       this.router.navigateByUrl('/win');
     } else if (this.game.lose) {
-      console.log('user has lost!');
-      // redirect to /lose
       this.router.navigateByUrl('/lose');
     } else {
-      console.log('new game, difficulty has not been selected.  redirecting to /');
-      // redirect to /
       this.router.navigateByUrl('/');
     }
+  }
+
+  isClean(str: string): boolean {
+    return this.alphabet.includes(str);
+  }
+
+  cleanInput(str: string): string {
+    if (str.length > 1) {
+      str = str.slice(str.length - 1);
+    }
+    str = str.toLowerCase();
+    if (!this.alphabet.includes(str)) {
+      str = '';
+    }
+    return str;
   }
 
 }
