@@ -8,6 +8,7 @@ export interface State {
   badGuessArray?: string[];
   hiddenLetterCount?: number;
   remainingGuesses?: number;
+  totalGuesses?: number;
   win?: boolean;
   lose?: boolean;
   dictionary?: string;
@@ -36,6 +37,7 @@ export function reducer(state = initialState, action: gameActions.Actions): Stat
         badGuessArray: game.badGuessArray,
         hiddenLetterCount: game.hiddenLetterCount,
         remainingGuesses: game.remainingGuesses,
+        totalGuesses: game.totalGuesses,
         win: game.win,
         lose: game.lose,
         dictionary: game.dictionary
