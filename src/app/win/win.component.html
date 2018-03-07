@@ -4,7 +4,7 @@
     <span class="difficulty">{{game.difficulty}}</span>
   </div>
   <div class="word">
-    <div *ngFor="let item of game.wordArray">
+    <div *ngFor="let item of game.wordArray" class="letter-wrapper">
       <span class="letter">{{item.letter}}</span>
     </div>
   </div>
@@ -19,20 +19,35 @@
       You won!
     </div>
     <div class="winner-wrapper">
-      <div *ngFor="let letter of game.badGuessArray" class="all-guess-wrapper">
-        <span class="all-guess-letter">{{letter}}</span>
+      <div class="all-guess-wrapper">
+        <div *ngFor="let letter of game.badGuessArray" class="all-guess">
+          <span class="all-guess-letter">{{letter}}</span>
+        </div>
       </div>
-      <div [formGroup]="nameForm" class="winner-form">
-        <input formControlName="nameInput" name="nameInput" type="text" autofocus />
-        <input type="submit" value="Go" [attr.disabled]="!nameIsValid ? 'disabled' : null" (click)="submitName(nameForm.value.nameInput)" />
-      </div>
+      <form [formGroup]="nameForm" class="winner-form">
+        Name:
+        <input
+          formControlName="nameInput"
+          class="name-input"
+          name="nameInput"
+          type="text"
+          size="10"
+          placeholder="(10-chars, a-z)"
+          autofocus />
+        <input
+          type="submit"
+          value="Go"
+          class="name-submit"
+          [attr.disabled]="!nameIsValid ? 'disabled' : null"
+          (click)="submitName(nameForm.value.nameInput)" />
+      </form>
       <br />
       <span>
         <a href="{{game.dictionary}}" target="_blank">Define: {{game.word}}</a>
       </span>
       <br />
       <span>
-        <a (click)="utils.startClean()">Return</a>
+        <a class="return" (click)="utils.startClean()">Return</a>
       </span>
     </div>
   </div>
