@@ -1,5 +1,5 @@
 # MysteryWord
-Try and guess a word letter-by-letter.  This is a front-end Angular v5 application that demonstrates angular components, rxjs observables, ngrx/store configured in a Redux fashion, and reactive forms.  The styling is minimal, but sufficiently responsive.
+Try and guess a word letter-by-letter.  This is a front-end Angular v5 application that demonstrates angular components, rxjs observables, ngrx/store configured in a Redux fashion, and reactive forms.  The styling is minimal, but sufficiently responsive.  I purposely left the data available to the front-end to benefit the example.
 
 It's hosted [here](https://mystery-word-ng5.firebaseapp.com) via firebase.
 
