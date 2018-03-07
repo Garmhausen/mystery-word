@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { Store } from '@ngrx/store';
 
@@ -32,9 +32,17 @@ export class PlayComponent implements OnInit, OnDestroy {
   public guessForm:  FormGroup;
   public guessInput: FormControl;
 
+  guess = '';
+  guessIsValid = false;
+
   constructor(private store: Store<State>, private gameService: GameService, private router: Router) {
     this.guessForm = new FormGroup({
-      guessInput: new FormControl(),
+      guessInput: new FormControl(this.guess, [
+        Validators.required,
+        Validators.minLength(1),
+        Validators.maxLength(1),
+        Validators.pattern(/^[A-Za-z]+$/)
+      ]),
     });
     this.subscribeToGuessFormChanges();
   }
@@ -53,7 +61,16 @@ export class PlayComponent implements OnInit, OnDestroy {
   }
 
   subscribeToGuessFormChanges() {
+    const guessStatusChanges$ = this.guessForm.statusChanges;
     const guessValueChanges$  = this.guessForm.valueChanges;
+
+    guessStatusChanges$.subscribe(x => {
+      if (x === 'VALID') {
+        this.guessIsValid = true;
+      } else {
+        this.guessIsValid = false;
+      }
+    });
 
     guessValueChanges$.subscribe(x => {
       if (x.guessInput && x.guessInput.length > 0 && !this.isClean(x.guessInput)) {
