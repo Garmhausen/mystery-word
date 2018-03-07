@@ -12,14 +12,26 @@
     background: lightgray;
 
     thead {
-      font-size: 1.4rem;
+      font-size: 1rem;
       font-weight: 800;
     }
     
     td {
       border: 1px solid lightgray;
       background: white;
-      padding: 10px 10px 5px;
+      padding: 5px 5px 2px;
+      font-size: .7rem;
+    }
+
+    @media screen and (min-width: 768px) {
+      thead {
+        font-size: 1.4rem;
+      }
+
+      td {
+        font-size: 1rem;
+        padding: 10px 10px 5px;
+      }
     }
   }
 }

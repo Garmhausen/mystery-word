@@ -83,14 +83,20 @@
         margin-left: 15px;
         background: white;
         outline: none;
-        color: blue;
+        color: dodgerblue;
         font-size: 1rem;
       }
 
       .guess-submit:hover {
         color: white;
-        background: blue;
-        border-color: blue;
+        background: dodgerblue;
+        border-color: dodgerblue;
+      }
+
+      .guess-submit:disabled {
+        border-color: lightgray;
+        color: lightgray;
+        background: white;
       }
     }
 
@@ -101,7 +107,7 @@
         width: 10px;
 
         .all-guess-letter {
-          color: red;
+          color: firebrick;
         }
       }
     }

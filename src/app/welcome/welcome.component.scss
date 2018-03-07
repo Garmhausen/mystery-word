@@ -47,33 +47,33 @@
     }
 
     .easy {
-      color: green;
+      color: forestgreen;
     }
 
     .easy:hover {
       color: white;
-      background: green;
-      border-color: green;
+      background: forestgreen;
+      border-color: forestgreen;
     }
 
     .normal {
-      color: blue;
+      color: dodgerblue;
     }
 
     .normal:hover {
       color: white;
-      background: blue;
-      border-color: blue;
+      background: dodgerblue;
+      border-color: dodgerblue;
     }
 
     .hard {
-      color: red;
+      color: firebrick;
     }
 
     .hard:hover {
       color: white;
-      background: red;
-      border-color: red;
+      background: firebrick;
+      border-color: firebrick;
     }
   }
 
