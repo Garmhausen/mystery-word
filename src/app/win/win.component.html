@@ -1,3 +1,31 @@
-<p>
-  win works!
-</p>
+<section class="win-comp">
+  <div class="diff">
+    <span>Difficulty</span>
+    <span class="difficulty">{{game.difficulty}}</span>
+  </div>
+  <div class="word">
+    <div *ngFor="let item of game.wordArray">
+      <span class="letter">{{item.letter}}</span>
+    </div>
+  </div>
+  <div class="remaining-guesses">
+    <span>Remaining Guesses</span><br />
+    <span class="remaining-num">
+      {{game.remainingGuesses}}
+    </span>
+  </div>
+  <div class="bad-and-current">
+    <div class="guess-title">
+      You won!
+    </div>
+    <div class="winner-wrapper">
+      <div *ngFor="let letter of game.badGuessArray" class="all-guess-wrapper">
+        <span class="all-guess-letter">{{letter}}</span>
+      </div>
+      <div [formGroup]="nameForm" class="winner-form">
+        <input formControlName="nameInput" name="nameInput" type="text" autofocus />
+        <input type="submit" value="Go" [attr.disabled]="!nameIsValid ? 'disabled' : null" (click)="submitName(nameForm.value.nameInput)" />
+      </div>
+    </div>
+  </div>
+</section>
