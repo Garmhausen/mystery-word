@@ -12,7 +12,7 @@ export class GameService {
 
   constructor(private http: HttpClient) { }
 
-  getNewGame(difficulty) {
+  getNewGame(difficulty): Promise<any> {
     let headers = new HttpHeaders;
     headers = headers.append('Content-Type', 'application/json');
     const url = this.api + 'new';
@@ -22,7 +22,7 @@ export class GameService {
     return this.http.post(url, body, { headers }).toPromise();
   }
 
-  makeGuess(game, guess) {
+  makeGuess(game, guess): Promise<any> {
     let headers = new HttpHeaders;
     headers = headers.append('Content-Type', 'application/json');
     const url = this.api + 'play';
@@ -33,7 +33,7 @@ export class GameService {
     return this.http.post(url, body, { headers }).toPromise();
   }
 
-  submitWin(game, name) {
+  submitWin(game, name): Promise<any> {
     let headers = new HttpHeaders;
     headers = headers.append('Content-Type', 'application/json');
     const url = this.api + 'win';
@@ -42,5 +42,12 @@ export class GameService {
       name: name
     };
     return this.http.post(url, body, { headers }).toPromise();
+  }
+
+  getWinners(): Promise<any> {
+    let headers = new HttpHeaders;
+    headers = headers.append('Content-Type', 'application/json');
+    const url = this.api + 'winners';
+    return this.http.get(url, { headers }).toPromise();
   }
 }
