@@ -32,4 +32,15 @@ export class GameService {
     };
     return this.http.post(url, body, { headers }).toPromise();
   }
+
+  submitWin(game, name) {
+    let headers = new HttpHeaders;
+    headers = headers.append('Content-Type', 'application/json');
+    const url = this.api + 'win';
+    const body = {
+      game: game,
+      name: name
+    };
+    return this.http.post(url, body, { headers }).toPromise();
+  }
 }
