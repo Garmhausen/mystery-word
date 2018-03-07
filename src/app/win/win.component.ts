@@ -45,7 +45,7 @@ export class WinComponent implements OnInit, OnDestroy {
       } else if (this.game.lose) {
         this.router.navigateByUrl('/lose');
       } else if (!this.game.win) {
-        this.router.navigateByUrl('/');
+        this.startClean();
       }
     });
   }
@@ -83,5 +83,10 @@ export class WinComponent implements OnInit, OnDestroy {
         this.router.navigateByUrl('/winners');
       });
     }
+  }
+
+  startClean(): void {
+    this.store.dispatch(new GameActions.RemoveGame());
+    this.router.navigateByUrl('/');
   }
 }

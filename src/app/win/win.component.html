@@ -26,6 +26,14 @@
         <input formControlName="nameInput" name="nameInput" type="text" autofocus />
         <input type="submit" value="Go" [attr.disabled]="!nameIsValid ? 'disabled' : null" (click)="submitName(nameForm.value.nameInput)" />
       </div>
+      <br />
+      <span>
+        <a href="{{game.dictionary}}" target="_blank">Define: {{game.word}}</a>
+      </span>
+      <br />
+      <span>
+        <a (click)="startClean()">Return</a>
+      </span>
     </div>
   </div>
 </section>
