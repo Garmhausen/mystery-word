@@ -1,6 +1,17 @@
 # MysteryWord
+Try and guess a word letter-by-letter.  This is a front-end Angular v5 application that demonstrates angular components, rxjs observables, ngrx/store configured in a Redux fashion, and reactive forms.  The styling is minimal, but sufficiently responsive.
+
+It's hosted [here](https://mystery-word-ng5.firebaseapp.com) via firebase.
+
+This app utilizes a Node and Express back-end api under a [different repository](https://github.com/Garmhausen/mystery-word-api).
+
+This project was a refactoring of a previous [MysteryWord](https://github.com/Garmhausen/MysteryWord) app that was built using Node and Express as a back-end with Mustache templates.  Hosted [here](https://mysteryword.herokuapp.com/).
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.2.
+
+## Install
+
+Clone/Download and run `yarn` (or `npm install` if you prefer) from within the app's directory.
 
 ## Development server
 
