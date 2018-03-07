@@ -29,9 +29,8 @@ export class PlayComponent implements OnInit, OnDestroy {
     'u', 'v', 'w', 'x',
     'y', 'z'];
 
-  public guessForm:   FormGroup;
-  public guessInput:  FormControl;
-  // public events:      any[] = [];
+  public guessForm:  FormGroup;
+  public guessInput: FormControl;
 
   constructor(private store: Store<State>, private gameService: GameService, private router: Router) {
     this.guessForm = new FormGroup({
@@ -54,16 +53,10 @@ export class PlayComponent implements OnInit, OnDestroy {
   }
 
   subscribeToGuessFormChanges() {
-    // const guessStatusChanges$ = this.guessForm.statusChanges;
     const guessValueChanges$  = this.guessForm.valueChanges;
 
-    // guessStatusChanges$.subscribe(x => {
-    //   this.events.push({ event: 'STATUS_CHANGED', object: x }); // for future validation.
-    // });
-
     guessValueChanges$.subscribe(x => {
-      // this.events.push({ event: 'VALUE_CHANGED', object: x }); // for debugging
-      if (x.guessInput.length > 0 && !this.isClean(x.guessInput)) {
+      if (x.guessInput && x.guessInput.length > 0 && !this.isClean(x.guessInput)) {
         const str = this.cleanInput(x.guessInput);
         this.guessForm.reset({ guessInput: str });
       }
@@ -102,5 +95,4 @@ export class PlayComponent implements OnInit, OnDestroy {
     }
     return str;
   }
-
 }
