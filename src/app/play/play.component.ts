@@ -19,13 +19,15 @@ export class PlayComponent implements OnInit, OnDestroy {
   storeSub: any;
   game:     any;
 
-  public guessForm:  FormGroup;
-  public guessInput: FormControl;
-  public events:     any[] = [];
+  public guessForm:   FormGroup;
+  public guessInput:  FormControl;
+  // public guessSubmit: FormControl;
+  public events:      any[] = [];
 
   constructor(private store: Store<State>, private gameService: GameService, private router: Router) {
     this.guessForm = new FormGroup({
-      guessInput: new FormControl('default')
+      guessInput: new FormControl(),
+      // guessSubmit: new FormControl()
     });
     this.subscribeToGuessFormChanges();
   }
@@ -54,12 +56,16 @@ export class PlayComponent implements OnInit, OnDestroy {
 
     guessValueChanges$.subscribe(x => {
       this.events.push({ event: 'VALUE_CHANGED', object: x }); // for debugging
+      console.log('x =', x);
+      if (x.guessInput && x.guessInput.length > 1) {
+        this.guessForm.reset({ guessInput: x.guessInput.slice(x.guessInput.length - 1) });
+      }
     });
-
-    // TODO: listen for submition here and process guess using the function below.
   }
 
   submitGuess(guess) {
+    console.log('make guess for', guess);
+    this.guessForm.reset();
     this.gameService.makeGuess(this.game, guess).then(   (r: any) => {
         this.store.dispatch(new GameActions.UpdateGame(r));
       });

@@ -16,14 +16,12 @@
     </span>
   </div>
   <div class="bad-and-current">
-    <div class="guess-title">
-      Type a guess:
+    <div [formGroup]="guessForm" class="guess-title">
+      Type a guess: <input formControlName="guessInput" name="guessInput" />
+      <input type="submit" value="Go" (click)="submitGuess(guessForm.value.guessInput)"/>
     </div>
     <div *ngFor="let letter of game.badGuessArray" class="all-guess-wrapper">
       <span class="all-guess-letter">{{letter}}</span>
-    </div>
-    <div class="current-guess">
-      <span>???</span>
     </div>
   </div>
 </section>
