@@ -19,6 +19,7 @@ import { CustomRouterStateSerializer } from './shared/utils';
 // services
 import { GameService } from './game.service';
 import { Utils } from './shared/utils';
+import { LoadingService } from './loading.service';
 
 // components
 import { AppComponent } from './app.component';
@@ -50,6 +51,7 @@ import { LoseComponent } from './lose/lose.component';
   ],
   providers: [
     GameService,
+    LoadingService,
     Utils,
     {
       provide: RouterStateSerializer,
