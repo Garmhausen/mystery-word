@@ -32,7 +32,7 @@ export class PlayComponent implements OnInit, OnDestroy {
   public guessForm:  FormGroup;
   public guessInput: FormControl;
 
-  guess = '';
+  guess        = '';
   guessIsValid = false;
 
   constructor(private store: Store<State>, private gameService: GameService, private router: Router) {
@@ -48,11 +48,12 @@ export class PlayComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.storeSub = this.store.select('game').subscribe(game => {
-      this.game = game;
-      if (!this.game.active) {
-        this.determineOutcome();
-      }
+    this.storeSub = this.store.select('game')
+      .subscribe(game => {
+        this.game = game;
+        if (!this.game.active) {
+          this.determineOutcome();
+        }
     });
   }
 
@@ -60,6 +61,9 @@ export class PlayComponent implements OnInit, OnDestroy {
     this.storeSub.unsubscribe();
   }
 
+  /**
+   * Handle changes to the reactive form through subscription
+   */
   subscribeToGuessFormChanges() {
     const guessStatusChanges$ = this.guessForm.statusChanges;
     const guessValueChanges$  = this.guessForm.valueChanges;
@@ -80,14 +84,21 @@ export class PlayComponent implements OnInit, OnDestroy {
     });
   }
 
-  submitGuess(guess): void {
-    console.log('make guess for', guess);
+  /**
+   * Submit user guesses to the GameService
+   * @param guess a letter
+   */
+  submitGuess(guess: string): void {
     this.guessForm.reset();
-    this.gameService.makeGuess(this.game, guess).then(   (r: any) => {
+    this.gameService.makeGuess(this.game, guess)
+      .then((r: any) => {
         this.store.dispatch(new GameActions.UpdateGame(r));
       });
   }
 
+  /**
+   * Check to see if the game has been won or lost.
+   */
   determineOutcome(): void {
     if (this.game.win) {
       this.router.navigateByUrl('/win');
@@ -98,10 +109,19 @@ export class PlayComponent implements OnInit, OnDestroy {
     }
   }
 
+  /**
+   * Determine if the input can be accepted.
+   * @param str any single character
+   */
   isClean(str: string): boolean {
     return this.alphabet.includes(str);
   }
 
+  /**
+   * Change any string to either the last letter typed
+   * or to empty.
+   * @param str any string
+   */
   cleanInput(str: string): string {
     if (str.length > 1) {
       str = str.slice(str.length - 1);

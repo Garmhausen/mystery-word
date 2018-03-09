@@ -17,12 +17,12 @@ import * as GameActions from '../shared/actions/game';
 export class WelcomeComponent implements OnInit, OnDestroy {
 
   storeSub: any;
-  game: any;
+  game:     any;
 
   constructor(
-    private store: Store<State>,
-    private router: Router,
-    private gameService: GameService,
+    private store:          Store<State>,
+    private router:         Router,
+    private gameService:    GameService,
     private loadingService: LoadingService,
   ) { }
 
@@ -36,10 +36,13 @@ export class WelcomeComponent implements OnInit, OnDestroy {
     this.storeSub.unsubscribe();
   }
 
-  startGame(difficulty) {
+  /**
+   * Set up a new game based on user choice of difficulty.
+   * @param difficulty either 'Easy', 'Normal', or 'Hard'
+   */
+  startGame(difficulty: string) {
     this.loadingService.display(true);
     this.gameService.getNewGame(difficulty).then((r: any) => {
-        console.log('game =', r);
         this.store.dispatch(new GameActions.UpdateGame(r));
         this.loadingService.display(false);
         this.router.navigateByUrl('/play');

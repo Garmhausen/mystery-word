@@ -1,17 +1,17 @@
 import * as gameActions from '../actions/game';
 
 export interface State {
-  active: boolean;
-  word?: string;
-  difficulty?: string;
-  wordArray?: any[];
-  badGuessArray?: string[];
+  active:             boolean;
+  word?:              string;
+  difficulty?:        string;
+  wordArray?:         any[];
+  badGuessArray?:     string[];
   hiddenLetterCount?: number;
-  remainingGuesses?: number;
-  totalGuesses?: number;
-  win?: boolean;
-  lose?: boolean;
-  dictionary?: string;
+  remainingGuesses?:  number;
+  totalGuesses?:      number;
+  win?:               boolean;
+  lose?:              boolean;
+  dictionary?:        string;
 }
 
 const initialState: State = {
@@ -30,17 +30,17 @@ export function reducer(state = initialState, action: gameActions.Actions): Stat
         active = false;
       }
       return Object.assign({}, state, {
-        active: active,
-        word: game.word,
-        difficulty: game.difficulty,
-        wordArray: game.wordArray,
-        badGuessArray: game.badGuessArray,
+        active:            active,
+        word:              game.word,
+        difficulty:        game.difficulty,
+        wordArray:         game.wordArray,
+        badGuessArray:     game.badGuessArray,
         hiddenLetterCount: game.hiddenLetterCount,
-        remainingGuesses: game.remainingGuesses,
-        totalGuesses: game.totalGuesses,
-        win: game.win,
-        lose: game.lose,
-        dictionary: game.dictionary
+        remainingGuesses:  game.remainingGuesses,
+        totalGuesses:      game.totalGuesses,
+        win:               game.win,
+        lose:              game.lose,
+        dictionary:        game.dictionary
       });
 
     case gameActions.REMOVE_GAME:

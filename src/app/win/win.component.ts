@@ -18,19 +18,19 @@ import * as GameActions from '../shared/actions/game';
 export class WinComponent implements OnInit, OnDestroy {
 
   storeSub: any;
-  game: any;
+  game:     any;
 
-  public nameForm: FormGroup;
+  public nameForm:  FormGroup;
   public nameInput: FormControl;
 
-  name = '';
+  name        = '';
   nameIsValid = false;
 
   constructor(
-    private store: Store<State>,
+    private store:       Store<State>,
     private gameService: GameService,
-    private router: Router,
-    public utils: Utils
+    private router:      Router,
+    public  utils:       Utils
   ) {
     this.nameForm = new FormGroup({
       nameInput: new FormControl(this.name, [
@@ -60,32 +60,33 @@ export class WinComponent implements OnInit, OnDestroy {
     this.storeSub.unsubscribe();
   }
 
+  /**
+   * Handle changes to the reactive form through subscriptions.
+   */
   subscribeToNameFormChanges() {
-    const nameValueChanges$ = this.nameForm.valueChanges;
-
+    const nameValueChanges$  = this.nameForm.valueChanges;
     const nameStatusChanges$ = this.nameForm.statusChanges;
 
     nameValueChanges$.subscribe(x => {
-      console.log('name input valueChange event', x);
       this.name = x.nameInput;
     });
 
     nameStatusChanges$.subscribe(x => {
-      console.log('name input statusChange event', x);
       if (x === 'VALID') {
         this.nameIsValid = true;
       } else {
         this.nameIsValid = false;
       }
-      console.log('nameIsValid =', this.nameIsValid);
     });
   }
 
-  submitName(name): void {
-    console.log('submit name:', name);
+  /**
+   * Submit user's name to register in winners table.
+   * @param name user's entered name
+   */
+  submitName(name: string): void {
     if (this.nameIsValid) {
       this.gameService.submitWin(this.game, name).then((r: any) => {
-        console.log('submitted win.');
         this.router.navigateByUrl('/winners');
       });
     }

@@ -11,8 +11,9 @@ import * as GameActions from './actions/game';
 export class Utils {
   constructor(private store: Store<State>, private router: Router) { }
 
-  // put app-wide utility functions here.
-
+  /**
+   * Remove current game from the store and navigate to the welcome page.
+   */
   startClean(): void {
     this.store.dispatch(new GameActions.RemoveGame());
     this.router.navigateByUrl('/');
@@ -20,13 +21,13 @@ export class Utils {
 }
 
 export interface RouterStateUrl {
-  url: string;
+  url:         string;
   queryParams: Params;
 }
 
 export class CustomRouterStateSerializer implements RouterStateSerializer<RouterStateUrl> {
   serialize(routerState: RouterStateSnapshot): RouterStateUrl {
-    const { url } = routerState;
+    const { url }     = routerState;
     const queryParams = routerState.root.queryParams;
     return { url, queryParams };
   }

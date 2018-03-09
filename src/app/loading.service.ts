@@ -5,6 +5,10 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 export class LoadingService {
   public status: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
+  /**
+   * Toggle display of loading spinner
+   * @param value boolean
+   */
   display(value: boolean) {
     this.status.next(value);
   }

@@ -16,12 +16,12 @@ import * as GameActions from '../shared/actions/game';
 export class LoseComponent implements OnInit, OnDestroy {
 
   storeSub: any;
-  game: any;
+  game:     any;
 
   constructor(
-    private store: Store<State>,
+    private store:  Store<State>,
     private router: Router,
-    public utils: Utils
+    public  utils:  Utils
   ) { }
 
   ngOnInit() {

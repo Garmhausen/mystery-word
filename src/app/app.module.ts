@@ -3,14 +3,16 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+// env
+import { environment } from '../environments/environment';
+
+// routes
 import { AppRoutingModule } from './app-routing.module';
 
 // ngrx
 import { StoreModule } from '@ngrx/store';
 import { StoreRouterConnectingModule, RouterStateSerializer } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-
-import { environment } from '../environments/environment';
 
 // custom ngrx
 import { reducers, metaReducers } from './shared/reducers';
@@ -54,7 +56,7 @@ import { LoseComponent } from './lose/lose.component';
     LoadingService,
     Utils,
     {
-      provide: RouterStateSerializer,
+      provide:  RouterStateSerializer,
       useClass: CustomRouterStateSerializer
     }
   ],
