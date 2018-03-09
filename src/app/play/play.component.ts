@@ -16,8 +16,8 @@ import * as GameActions from '../shared/actions/game';
 })
 export class PlayComponent implements OnInit, OnDestroy {
 
-  storeSub: any;
   game:     Game;
+  storeSub: any;
 
   // choosing not to use regex for the benefit of this example.
   alphabet = [

@@ -16,8 +16,8 @@ import * as GameActions from '../shared/actions/game';
 })
 export class WelcomeComponent implements OnInit, OnDestroy {
 
-  storeSub: any;
   game:     Game;
+  storeSub: any;
 
   constructor(
     private store:          Store<State>,

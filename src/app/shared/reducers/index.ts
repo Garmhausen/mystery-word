@@ -5,12 +5,11 @@ import {
   ActionReducer,
   MetaReducer
 } from '@ngrx/store';
-
-import { environment } from '../../../environments/environment';
-import { RouterStateUrl } from '../utils';
 import * as fromRouter from '@ngrx/router-store';
 import { storeFreeze } from 'ngrx-store-freeze';
 
+import { environment } from '../../../environments/environment';
+import { RouterStateUrl } from '../utils';
 import * as fromGame from '../reducers/game';
 import { Game } from '../utils';
 

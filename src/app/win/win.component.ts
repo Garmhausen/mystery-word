@@ -16,8 +16,8 @@ import * as GameActions from '../shared/actions/game';
 })
 export class WinComponent implements OnInit, OnDestroy {
 
-  storeSub: any;
   game:     Game;
+  storeSub: any;
 
   public nameForm:  FormGroup;
   public nameInput: FormControl;

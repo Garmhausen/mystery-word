@@ -1,20 +1,6 @@
 import * as gameActions from '../actions/game';
 import { Game } from '../utils';
 
-// export interface State {
-//   active:             boolean;
-//   word?:              string;
-//   difficulty?:        string;
-//   wordArray?:         any[];
-//   badGuessArray?:     string[];
-//   hiddenLetterCount?: number;
-//   remainingGuesses?:  number;
-//   totalGuesses?:      number;
-//   win?:               boolean;
-//   lose?:              boolean;
-//   dictionary?:        string;
-// }
-
 const initialState: Game = {
   active: false
 };
