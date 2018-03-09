@@ -19,11 +19,9 @@ export class WinnersComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.loadingService.display(true);
     this.gameService.getWinners()
       .then((r: any) => {
         this.winners = r;
-        this.loadingService.display(false);
     });
   }
 }
