@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 
 import { Store } from '@ngrx/store';
 
-import { Game } from '../shared/utils';
+import { Game, Utils } from '../shared/utils';
 import { State } from '../shared/reducers';
 
 @Component({
@@ -18,7 +18,8 @@ export class LoseComponent implements OnInit, OnDestroy {
 
   constructor(
     private store:  Store<State>,
-    private router: Router
+    private router: Router,
+    public  utils:  Utils,
   ) { }
 
   ngOnInit() {
