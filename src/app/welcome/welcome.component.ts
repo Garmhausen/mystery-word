@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 
 import { GameService } from '../game.service';
 import { LoadingService } from '../loading.service';
-
+import { Game } from '../shared/utils';
 import { State } from '../shared/reducers';
 import * as GameActions from '../shared/actions/game';
 
@@ -17,7 +17,7 @@ import * as GameActions from '../shared/actions/game';
 export class WelcomeComponent implements OnInit, OnDestroy {
 
   storeSub: any;
-  game:     any;
+  game:     Game;
 
   constructor(
     private store:          Store<State>,

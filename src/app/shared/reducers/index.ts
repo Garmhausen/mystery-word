@@ -12,10 +12,11 @@ import * as fromRouter from '@ngrx/router-store';
 import { storeFreeze } from 'ngrx-store-freeze';
 
 import * as fromGame from '../reducers/game';
+import { Game } from '../utils';
 
 export interface State {
   routerReducer: fromRouter.RouterReducerState<RouterStateUrl>;
-  game:          fromGame.State;
+  game:          Game;
 }
 
 export const reducers: ActionReducerMap<State> = {
@@ -35,7 +36,7 @@ export function logger(reducer: ActionReducer<State>): ActionReducer<State> {
 
 export const metaReducers: MetaReducer<State>[] = !environment.production ? [logger, storeFreeze] : [];
 
-export const getGameState = createFeatureSelector<fromGame.State>('company');
+export const getGameState = createFeatureSelector<Game>('company');
 export const getGame      = createSelector(
   getGameState,
   fromGame.getGame

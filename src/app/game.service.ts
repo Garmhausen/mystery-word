@@ -1,13 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
-import { of } from 'rxjs/observable/of';
 import { environment } from './../environments/environment';
+import { Game } from './shared/utils';
 
 @Injectable()
 export class GameService {
-
-  game: any;
 
   api = environment.api;
 
@@ -25,7 +23,7 @@ export class GameService {
     return this.http.post(url, body, { headers }).toPromise();
   }
 
-  makeGuess(game: any, guess: string): Promise<any> {
+  makeGuess(game: Game, guess: string): Promise<any> {
     let headers = new HttpHeaders;
     headers = headers.append('Content-Type', 'application/json');
     const url = this.api + 'play';
@@ -36,7 +34,7 @@ export class GameService {
     return this.http.post(url, body, { headers }).toPromise();
   }
 
-  submitWin(game: any, name: string): Promise<any> {
+  submitWin(game: Game, name: string): Promise<any> {
     let headers = new HttpHeaders;
     headers = headers.append('Content-Type', 'application/json');
     const url = this.api + 'win';

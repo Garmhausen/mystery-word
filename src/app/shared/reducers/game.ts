@@ -1,24 +1,25 @@
 import * as gameActions from '../actions/game';
+import { Game } from '../utils';
 
-export interface State {
-  active:             boolean;
-  word?:              string;
-  difficulty?:        string;
-  wordArray?:         any[];
-  badGuessArray?:     string[];
-  hiddenLetterCount?: number;
-  remainingGuesses?:  number;
-  totalGuesses?:      number;
-  win?:               boolean;
-  lose?:              boolean;
-  dictionary?:        string;
-}
+// export interface State {
+//   active:             boolean;
+//   word?:              string;
+//   difficulty?:        string;
+//   wordArray?:         any[];
+//   badGuessArray?:     string[];
+//   hiddenLetterCount?: number;
+//   remainingGuesses?:  number;
+//   totalGuesses?:      number;
+//   win?:               boolean;
+//   lose?:              boolean;
+//   dictionary?:        string;
+// }
 
-const initialState: State = {
+const initialState: Game = {
   active: false
 };
 
-export function reducer(state = initialState, action: gameActions.Actions): State {
+export function reducer(state = initialState, action: gameActions.Actions): Game {
 
   switch (action.type) {
     case gameActions.UPDATE_GAME:
@@ -51,4 +52,4 @@ export function reducer(state = initialState, action: gameActions.Actions): Stat
   }
 }
 
-export const getGame = (state: State) => state;
+export const getGame = (state: Game) => state;

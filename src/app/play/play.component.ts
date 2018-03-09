@@ -5,7 +5,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 
 import { GameService } from '../game.service';
-
+import { Game } from '../shared/utils';
 import { State } from '../shared/reducers';
 import * as GameActions from '../shared/actions/game';
 
@@ -17,7 +17,7 @@ import * as GameActions from '../shared/actions/game';
 export class PlayComponent implements OnInit, OnDestroy {
 
   storeSub: any;
-  game:     any;
+  game:     Game;
 
   // choosing not to use regex for the benefit of this example.
   alphabet = [

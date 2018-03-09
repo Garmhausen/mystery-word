@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
 import { GameService } from '../game.service';
-import { LoadingService } from '../loading.service';
-import { Utils } from '../shared/utils';
 
 @Component({
   selector: 'app-winners',
@@ -12,11 +10,7 @@ import { Utils } from '../shared/utils';
 export class WinnersComponent implements OnInit {
   winners: any[] = [];
 
-  constructor(
-    public  utils:          Utils,
-    private gameService:    GameService,
-    private loadingService: LoadingService
-  ) { }
+  constructor(private gameService: GameService) { }
 
   ngOnInit() {
     this.gameService.getWinners()
